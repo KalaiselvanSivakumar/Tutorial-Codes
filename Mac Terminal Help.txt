@@ -1,0 +1,12 @@
+Symbolic Link creation in Mac via Terminal: (Always use full path)
+ln -s path_of_files path_where_link_to_create
+ln -s /Volumes/OfficeWork/ZRpkgQA/qa/ ./
+
+
+Error while starting a server - Server already running in the specified port:
+Reason is already running process not terminated. So it is occupying the port.
+Solution:
+	sudo lsof -i :PORT_NUMBER
+	sudo kill -9 PID
+Note: Replace PORT_NUMBER with your port's number (e.g. 8080) and PID with the process id (Usally chrome and java).
+	   Kill both. It will result in termination of chrome. Save any unsaved work.

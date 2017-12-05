@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Data Driven Documents Tutorial</title>
+        <script src="d3.v4.js"></script>
+    </head>
+    <body>
+        <div id="svgEl"></div>
+        <script>
+            var svgEl = d3.select("#svgEl")   //d3 uses a jQuery like selector
+                            .append("svg")
+                            .attr("width", 500)
+                            .attr("height", 500);
+            var circle = svgEl.append("circle")
+                                .attr("cx", 250)
+                                .attr("cy", 250)
+                                .attr("r", 100)
+                                .attr("fill", "green");
+            var rect = svgEl.append("rect")
+                                .attr("height", 500).attr("width", 100)
+                                .attr("fill", "blue")
+                                .attr("stroke", "blue")
+                                .attr("stroke-width", 2);
+            var line = svgEl.append("line")
+                                .attr("x1", 500).attr("y1", 0)
+                                .attr("x2", 500).attr("y2", 500)
+                                .attr("stroke-width", 2)
+                                .attr("stroke", "black");
+
+            const data = [1, 2, 3, 4, 5];
+            const moreData = [[5, 20], [480, 90], [250, 50], [100, 33], [330, 95]];
+
+            var xScale = d3.scaleLinear()
+                            .domain([0, d3.max(moreData, function (d) { return d[0]; })])
+                            .range([0, 500]);
+            var yScale = d3.scaleLinear()
+                            .domain([0, d3.max(moreData, function (d) { return d[1]; })])
+                            .range([500, 0]);
+
+            var xAxis = d3.axisBottom(xScale);
+        </script>
+    </body>
+</html

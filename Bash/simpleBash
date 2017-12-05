@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "hello $USER. Current working directory is $PWD"
+echo "And its file contents are : "
+ls #Comment while ls is a bash command.

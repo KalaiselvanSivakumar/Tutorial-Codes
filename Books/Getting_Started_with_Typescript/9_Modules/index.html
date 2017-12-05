@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TypeScript Modules Tutorial</title>
+        <script src="node_modules/systemjs/dist/system.js"></script>
+    </head>
+    <body>
+        <script>
+            SystemJS.config({
+                baseURL:'/',
+                packages: {
+                    '': {
+                        defaultExtension: 'js'
+                    }
+                }
+            });
+            System.import('./main')
+                .then(function() {
+                    console.log('Loaded');
+                })
+                .catch(function(err) {
+                    console.error(err);
+                });
+        </script>
+        <p>Look in the browser console</p>
+    </body>
+</html>
