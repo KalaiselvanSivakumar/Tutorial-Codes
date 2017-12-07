@@ -8,3 +8,9 @@ function calculateArea(shape: string, height: number, width: number): string {
 }
 
 document.body.innerHTML = calculateArea("Rectangle", 100, 25);
+
+// Below line of code throws compile type error due to type mismatch
+// document.body.innerHTML += calculateArea("Square", "Width", 25);
+
+// Below line of code throws compile type error - No of parameters mismatch
+// console.log(calculateArea("Square", 100, 200, 2));
