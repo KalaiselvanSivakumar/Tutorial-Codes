@@ -9,7 +9,7 @@ let regExConstructor = new RegExp("cat");
 /*
  * General Rule:
  * If the patern is a constant, use regex literal.
- * If th regualr expression is dynamic, use regex constructor
+ * If the regular expression is dynamic, use regex constructor
  */
 
 // Sample strings
