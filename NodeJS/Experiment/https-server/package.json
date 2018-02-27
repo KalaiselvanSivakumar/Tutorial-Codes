@@ -1,0 +1,14 @@
+{
+  "name": "https-server",
+  "version": "1.0.0",
+  "description": "https-server using NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kalai selvan Sivakumar",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^9.4.6"
+  }
+}
