@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+    <button>Get Data</button>
+    <div id="dataHolder"></div>
+    <script src="/jquery-3.3.1.js"></script>
+    <script>
+        const btn = document.querySelector('button'),
+            dataHolder = document.getElementById("dataHolder");
+        btn.addEventListener('click', getData);
+        
+        function getData(event) {
+            $.ajax({
+                url: '/users',
+                method: 'GET',
+                success: function (data) {
+                    console.log(data);
+                    dataHolder.innerHTML = JSON.stringify(data);
+                },
+                error: function (err) {
+                    dataHolder.innerHTML = 'Data fetching FAILED';
+                }
+            })
+        }
+    </script>
+</body>
+</html>
