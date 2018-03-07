@@ -1,0 +1,18 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "GulpTaskDebugger",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/Gulp/Medium/AutomateAllThings/node_modules/gulp/bin/gulp.js",
+            "stopOnEntry": false, // Make it true to debug from the gulp.js start point
+            "args": ["build"], // Arguments while executing the program. In my case, I needed to run "gulp build". Can be empty too
+            "cwd": "${workspaceRoot}/Gulp/Medium/AutomateAllThings/",
+            "console": "internalConsole"
+        }
+    ]
+}
