@@ -124,5 +124,21 @@ gulp.task('build', ['inject:dist']);
 var del = require('del');
 
 gulp.task('clean', () => {
-    del([paths.tmp, paths.dist]);
+    return del([paths.tmp, paths.dist], {
+        force: true
+    });
+});
+
+var rename = require('gulp-rename');
+
+gulp.task('rename', ['clean'], () => {
+    return gulp.src(paths.src)
+            .pipe(rename((path) => {
+                path.dirname = path.dirname.replace('ts', 'js');
+            }))
+            .pipe(gulp.dest(paths.dist));
+});
+
+gulp.task('rememp', ['rename'], () => {
+    del(['dist/**/ts']);
 });
