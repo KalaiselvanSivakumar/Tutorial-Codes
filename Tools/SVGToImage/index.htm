@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG to Image Convertor</title>
+</head>
+<body>
+    <h2>Please place the file under the server directory in the name "convert.svg" and refresh the page to download automatically</h2>
+    <h2>Adjust width and height in the source file and refresh to auto-download</h2>
+    <canvas width="700" height="720"></canvas>
+
+    <script>
+        var canvasEl = document.querySelector("canvas"),
+            context = canvasEl.getContext("2d");
+        
+        var image = new Image;
+        image.src = "convert.svg";
+        image.onload = () => {
+            console.log("SVG file loaded successfully");
+            context.drawImage(image, 0, 0);
+
+            var a = document.createElement("a");
+            a.download = "converted.png";
+            a.href = canvasEl.toDataURL("image/png");
+            a.click();
+        }
+    </script>
+</body>
+</html>
