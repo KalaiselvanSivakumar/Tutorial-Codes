@@ -7,3 +7,8 @@
 
 #Node modules
 node_modules
+
+#Eclipse workspace folders
+.antsetup
+.metadata
+.recommenders
