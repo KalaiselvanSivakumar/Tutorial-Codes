@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table and Form Tutorial</title>
+</head>
+<body>
+    <table>
+        <caption>My HTML5 Table Caption</caption>
+        <tr>
+            <th>Game Name</th>
+            <th>Downloaded</th>
+            <th>Completed</th>
+        </tr>
+        <tr>
+            <td>Gears of War 4</td>
+            <td>Yes</td>
+            <td>No</td>
+        </tr>
+        <tr>
+            <td>Shadow of Mordor</td>
+            <td>Yes</td>
+            <td>Yes</td>
+        </tr>
+        <tr>
+            <td>Grand Theft Auto 5</td>
+            <td>No</td>
+            <td>No</td>
+        </tr>
+    </table>
+    <hr>
+    <form action="#" method="GET">
+        <div>Favourite Genre:</div>
+        <input type="radio" id="action-adventure" name="game-genre" value="action-adventure">
+        <label for="action-adventure">Action/Adventure</label>
+        <input type="radio" id="racing" name="game-genre" value="racing">
+        <label for="racing">Racing</label>
+        <input type="radio" id="role-playing" name="game-genre" value="role-playing">
+        <label for="role-playing">Role Playing</label>
+        <div>Gaming Accessories:</div>
+        <input type="checkbox" id="cb-ga-keyboard" name="cb-ga" value="keyboard">
+        <label for="cb-ga-keyboard">Keyboard</label>
+        <input type="checkbox" id="cb-ga-mouse" name="cb-ga" value="mouse">
+        <label for="cb-ga-mouse">Mouse</label>
+        <input type="checkbox" id="cb-ga-gamepad" name="cb-ga" value="gamepad">
+        <label for="cb-ga-gamepad">Gamepad</label>
+        <div>Login:</div>
+        <label for="t-gamer-id">Gamer ID:</label>
+        <input type="text" id="t-gamer-id" name="gamer-id">
+        <br>
+        <label for="p-gamer-id-password">Password:</label>
+        <input type="password" id="p-gamer-id-password">
+        <hr>
+        <label for="num-number1">Number Field</label>
+        <input type="number" id="num-number1" name="number-field">
+        <label for="col-color1">Color Field</label>
+        <input type="color" id="col-color1" name="color-field">
+        <label for="date-date1">Date Field</label>
+        <input type="date" id="date-date1" name="date-field">
+        <label for="url-url1">URL Field</label>
+        <input type="url" id="url-url1" name="url-field">
+        <label for="email-email1">email Field</label>
+        <input type="email" id="email-email1" name="email-field">
+        <div>
+            <input type="submit">
+            <input type="reset">
+        </div>
+    </form>
+</body>
+</html>
