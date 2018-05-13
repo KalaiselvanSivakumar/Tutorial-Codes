@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Animation</title>
+    <style>
+        .box {
+            -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+
+            -webkit-transition: -webkit-transform 3000ms;
+            transition: transform 3000ms;
+        }
+        .box.move {
+            -webkit-transform: translate(50px, 50px);
+            transform: translate(50px, 50px);
+        }
+
+        .infinite-move {
+            -webkit-animation-name: infinite-move-keyframe;
+            animation-name: infinite-move-keyframe;
+
+            -webkit-animation-duration: 2500ms;
+            animation-duration: 2500ms;
+
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+
+            -webkit-animation-direction: alternate;
+            animation-direction: alternate;
+        }
+
+        @-webkit-keyframes infinite-move-keyframe {
+            0% {
+                -webkit-transform: translate(0, 0);
+                opacity: 0.4;
+            }
+
+            25% {
+                opacity: 0.9;
+            }
+
+            50% {
+                -webkit-transform: translate(150px, 200px);
+                opacity: 0.2;
+            }
+
+            100% {
+                -webkit-transform: translate(40px, 30px);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes infinite-move-keyframe {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0.4;
+            }
+
+            25% {
+                opacity: 0.9;
+            }
+
+            50% {
+                transform: translate(150px, 200px);
+                opacity: 0.2;
+            }
+
+            100% {
+                transform: translate(40px, 30px);
+                opacity: 0.8;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class='box'>Text</div>
+    <div id="infiniteMove">Using KeyFrame</div>
+    <button onclick="moveText()" style="height: 30px; width: 100px; margin-top: 500px;">Move text</button>
+    <script>
+        function moveText() {
+            // Starting the transititon by adding the class 'move' to the div
+            var textDiv = document.getElementsByClassName('box')[0];
+            textDiv.classList.add('move');
+            var infiniteMove = document.getElementById('infiniteMove');
+            infiniteMove.classList.add('infinite-move');
+        }
+    </script>
+</body>
+</html>
