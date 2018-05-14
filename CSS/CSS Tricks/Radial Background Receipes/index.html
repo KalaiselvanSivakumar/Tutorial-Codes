@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radial Gradient Receipes</title>
+    <style>
+        .container {
+            border-radius: 10px;
+            display: inline-block;
+            height: 200px;
+            margin: 40px;
+            width: 400px;
+        }
+
+        /* Default - ellipse */
+        .centered-burst-ellipse-blue {
+            background: radial-gradient(#387989, #6dd5ed);
+        }
+
+        .centered-burst-ellipse-yellow {
+            background: radial-gradient(#fceabb, #f8b500);
+        }
+
+        /* Making it circle */
+        .centered-burst-circle-yellow {
+            background: radial-gradient(circle farthest-side, #fceabb, #f8b500);
+        }
+
+        /* Adjusting the radial gradient inner pattern */
+        /* Radial-gradient pattern's first param can have closest-side, farthest-side, closest-corner or farthest-corner and many more*/
+        /* circle at bottom center can also be used to position circle */
+        .centered-burst-circle-green-closest-side {
+            background: radial-gradient(circle closest-side, #56ab2f, #a8e063);
+        }
+
+        .centered-burst-circle-green-circle-size {
+            background: radial-gradient(circle 50px, #56ab2f, #a8e063);
+        }
+
+        .centered-burst-circle-green-color-size {
+            background: radial-gradient(circle, #56ab2f, #a8e063 20px);
+        }
+
+        .centered-burst-circle-green-farthest-corner {
+            background: radial-gradient(circle farthest-corner, #56ab2f, #a8e063);
+        }
+
+        .big-square {
+            background: radial-gradient(circle at top right, #3a7343, #3A6073);
+            border-radius: 20px;
+            display: inline-block;
+            height: 500px;
+            margin: 20px;
+            position: relative;
+            text-align: center;
+            width: 500px;
+        }
+
+        .small-square-container {
+            display: inline-block;
+            left: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+            --light: #5d1674;
+            --dark: #004738;
+            --box-shadow-color: #5eb19f;
+        }
+
+        .small-square {
+            border-radius: 5px;
+            display: inline-block;
+            height: 100px;
+            margin: 10px;
+            width: 100px;
+        }
+
+        .positioned-top-left {
+            background: radial-gradient(circle at top left, var(--light), var(--dark));
+            box-shadow: 5px 5px 10px var(--box-shadow-color);
+        }
+
+        .positioned-top-right {
+            background: radial-gradient(circle at top right, var(--light), var(--dark));
+            box-shadow: -5px 5px 10px var(--box-shadow-color);
+        }
+
+        .positioned-bottom-left {
+            background: radial-gradient(circle at bottom left, var(--light), var(--dark));
+            box-shadow: 5px -5px 10px var(--box-shadow-color);
+        }
+
+        .positioned-bottom-right {
+            background: radial-gradient(circle at bottom right, var(--light), var(--dark));
+            box-shadow: -5px -5px 10px var(--box-shadow-color);
+        }
+
+        .multiple-gradient-container {
+            background: #6dd5ed;
+            border-radius: 10px;
+            height: 300px;
+            margin: 20px;
+            width: 500px;
+        }
+
+        .multiple-gradient-transparency {
+            border-radius: 10px;
+            display: inline-block;
+            height: 300px;
+            width: 500px;
+            background: radial-gradient(circle at top left, rgba(3, 55, 107, 0.8), transparent 300px),
+                        radial-gradient(circle at top right, rgba(3, 107, 12, 0.7), transparent 300px),
+                        radial-gradient(circle at bottom left, rgba(107, 45, 3, 0.7), transparent 300px),
+                        radial-gradient(circle at bottom right, rgba(107, 3, 98, 0.8), transparent 300px);
+        }
+
+        .mouse-move-gradient {
+            border-radius: 20px;
+            display: inline-block;
+            height: 400px;
+            margin: 20px;
+            width: 600px;
+            background: radial-gradient(circle at center, #8cb474, #2708b1);
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class='container centered-burst-ellipse-blue'></div>
+    </div>
+    <div>
+        <div class='container centered-burst-ellipse-yellow'></div>
+        <div class='container centered-burst-circle-yellow'></div>
+    </div>
+    <div>
+        <div style="display: inline-block;">
+            <div class='container centered-burst-circle-green-closest-side'></div>
+            <div class='container centered-burst-circle-green-circle-size'></div>
+        </div>
+        <div style="display: inline-block;">
+            <div class='container centered-burst-circle-green-farthest-corner'></div>
+            <div class='container centered-burst-circle-green-color-size'></div>
+        </div>
+    </div>
+
+    <!-- Radial Gradient - Positioning -->
+    <div class='big-square'>
+        <div class='small-square-container'>
+            <div class='small-square positioned-top-left'></div>
+            <div class='small-square positioned-top-right'></div>
+            <div class='small-square positioned-bottom-left'></div>
+            <div class='small-square positioned-bottom-right'></div>
+        </div>
+    </div>
+
+    <!-- Multiple gradient to a single element -->
+    <div class='multiple-gradient-container'>
+        <div class='multiple-gradient-transparency'></div>
+    </div>
+
+    <!-- Moving the center of gradient with mouse move -->
+    <div class='mouse-move-gradient' onmousemove="moveGradientCenter(event)"></div>
+
+    <script>
+        var mouseOverGradientEl = document.querySelector('.mouse-move-gradient');
+        function moveGradientCenter(event) {
+            var xPosition = (event.offsetX / 600) * 100;
+            var yPosition = (event.offsetY / 400) * 100;
+            mouseOverGradientEl.style.background = 'radial-gradient(at '
+                                                    + xPosition + '% '
+                                                    + yPosition + '%, #8cb474, #2708b1)';
+        }
+    </script>
+</body>
+</html>
