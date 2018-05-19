@@ -1,0 +1,17 @@
+.wrapper {
+    display: grid;
+    grid-column-gap: 2rem;
+    grid-row-gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.item4 {
+    grid-column-start: 2;
+    grid-column-end: 4;
+
+    /* Short hand of the above one */
+    /* grid-column: 2 / 4; */
+
+    /* To span entire width, use -1 for end */
+    /* grid-column: 2 / -1; */
+}

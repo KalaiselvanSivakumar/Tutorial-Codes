@@ -1,0 +1,7 @@
+.wrapper {
+    display: grid;
+    grid-column-gap: 2rem;
+    grid-row-gap: 1rem;
+    /* Below will not work correctly as grids will have some gap between them */
+    grid-template-columns: repeat(3, calc(100% / 3));
+}

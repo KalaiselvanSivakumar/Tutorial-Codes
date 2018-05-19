@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beginner's Guide to CSS Grid</title>
+
+    <style>
+        .item {
+            border: 2px solid cadetblue;
+            box-sizing: border-box;
+            height: 70px;
+            font-size: 50px;
+            text-align: center;
+        }
+    </style>
+
+    <!-- Uncomment only the necessary css file to view changes -->
+    <link rel="stylesheet" href="sample_1_setting_up_grid.css">
+    <!-- <link rel="stylesheet" href="sample_2_grid_gap.css"> -->
+    <!-- <link rel="stylesheet" href="sample_3_grid_gap_column_and_row.css"> -->
+    <!-- <link rel="stylesheet" href="sample_4_repeat_function.css"> -->
+    <!-- <link rel="stylesheet" href="sample_5_equal_width_using_calc.css"> -->
+    <!-- <link rel="stylesheet" href="sample_6_equal_width_using_fr.css"> -->
+    <!-- <link rel="stylesheet" href="sample_7_sizing_with_different_units.css"> -->
+    <!-- <link rel="stylesheet" href="sample_8_sizing_individual_item.css"> -->
+    <!-- <link rel="stylesheet" href="sample_9_sizing_worst_case_scenario.css"> -->
+    <!-- <link rel="stylesheet" href="sample_11_positioning_explicitly.css"> -->
+
+    <!-- Uncomment item 7 for only this css -->
+    <!-- <link rel="stylesheet" href="sample_10_item-auto_positioning.css"> -->
+
+</head>
+<body>
+    <div class="wrapper">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item item4">4</div>
+        <div class="item item5">5</div>
+        <div class="item">6</div>
+
+        <!-- Uncomment below for sample10 grid-auto-flow: dense effect -->
+        <!-- <div class="item">7</div> -->
+    </div>
+</body>
+</html>
