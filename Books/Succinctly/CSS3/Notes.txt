@@ -1,0 +1,32 @@
+Chapter 3 - New Selectors:
+1. Universal Selector (*):
+    It applies to all elements at which it is targeted.
+    It should be used as minimal as possible as it will cause drastic performance reduction.
+
+2. Adjacent Sibling Selector (+):
+    It applies to the element immediately one and only one.
+
+3. Direct Child Selector (>):
+    Direct child selector is not greedy. It only selects the immediate children below the root element.
+	Children of children is not selected.
+
+4. General Sibling Selector (~):
+	Similar to "Adjacent Sibling Selector".
+	It selects not just one element but all matching elements.
+
+5. Attribute Selector:
+	HTML elements will have some attributes and value for those attributes.
+	This attribute or attribute + value can be used to select that particular element.
+	Like input[type="button"], which selects all input tags wihch contains the attribute type and value as button.
+	div[canmodify] can be used to select all divs which has canmodify attribute.
+	We can also select elements which don't have the attribute. Eg. div:not([canmodify])
+	Starts with:
+	To select elements which has value starting with "text" for the type attribute, we can use ^= like div[type^="text"]
+	The above will select all div elements with type attribute having the value text* linkee textbox, textarea and so on.
+	Ends with:
+	Like starts with, to select ends with some string, $= is used.
+	Eg. div[imagetype$=".png"]
+	Contains:
+	Like starts with and ends with, to select elements which has attribute with value that contains some text.
+	Eg. a[href*="users"]
+	The above will select anchor elements with href attribute whose value contains users in it.

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Attribute Selectors</title>
+	<style>
+		p[header] {
+			font-size: 18px;
+			color: rgb(16, 179, 124);
+		}
+		p[header^="title"] {
+			background-color: #232323;
+			color: #CCCCCC;
+		}
+		p[header="main"] {
+			font-size: 24px;
+			color: blue;
+		}
+	</style>
+</head>
+<body>
+	<p header="main">This is main header</p>
+	<p header>This is an element with only header attribute without any value assigned to it</p>
+	<p header="main">This is main header</p>
+	<p header="titlesmall">This is neither a main header nor header without value assigned to it</p>
+</body>
+</html>
