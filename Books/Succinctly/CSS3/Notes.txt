@@ -30,3 +30,84 @@ Chapter 3 - New Selectors:
 	Like starts with and ends with, to select elements which has attribute with value that contains some text.
 	Eg. a[href*="users"]
 	The above will select anchor elements with href attribute whose value contains users in it.
+
+Chapter 4 - New Pseudo Selectors:
+1. :focus
+	When an element is in focus state, this psuedo selector will get come into effect.
+	If used without regular selector, then it applies to whichever element has focused state and is currently focused.
+
+2. :visited
+	This psuedo selector has been there from CSS2.
+	It is used to indicate visited links which is decided based on the browser history.
+	THIS SELECTOR CAN BE USED TO GET BROWSER HISTORY.
+	But in today's modern browsers, this is prevented. Even though the link is visited, it will be shown only in UI
+	but when used getComputedStyle method to get the color, it will return only the initial color preventing browser history hacking.
+
+3. :disabled
+	This selector is used to style disabled form elements.
+	To make an element disabled, just add attribute disabled without any value to it.
+
+4. :enabled
+	This selector is logical opposite of disabled selector and no need of any attribute to be added to the element.
+
+5. :valid
+	Today's modern browser supports browser side validation of inputs before submitting to the server.
+	When the entered input for a field in the form is valid, this selector can be used to denote it.
+
+6. :invalid
+	When the entered input for a filed in the form is invalid or value is not entered for a required field,
+	this selector can be used to denote it as error.
+
+7. :checked
+	This selector is applied for input elements with type "checkbox" or "radio".
+	This is used to differentiate the values that are checked or selected from the rest of the options.
+
+8. :before
+	This selector unlike rest of the selectors, can be used to display content as well.
+	This selector adds the content to the before of the contents in the element with specified stylings.
+
+9. :after
+	This is the opposite of :before selector.
+	It adds the content after the contents of the element.
+
+10. First-X, Last-X and nth-X:
+	There are two groups.
+	 i) first-child, last-child and nth-child():
+	 	:first-child
+			This applies to the first element. child denotes that element must have parent.
+			In ul -> li, li elements will be the children of ul. But to select first li,
+			li:first-child is used.
+		:last-child
+			This applies to the last element.
+		:nth-child()
+			Unlike the above two, nth-child accepts an argument or parameter.
+			The parameter can be any valid algebric equation.
+			Eg. li:nth-child(3n)
+			This will select all elements which are in the mulitples of 3 position.
+			i.e. 0, 3, 6, 9, 12, ...
+			There is no 0th element like in array.
+			So 0th child is not applied.
+			However if you use (3n + 1), it will give 1, 4, 7, 10.
+			So all these are valid and hence for all those elements, style will be applied.
+
+			nth-child also accepts just a single number upon which selects only that element.
+			Eg. nth-child(5)
+
+			In tables, to select odd and even rows differently, you don't have to find an expression.
+			Instead you can use odd and even as value.
+			Eg. nth-child(odd), nth-child(even)
+
+			You can chain this selector to derive a complex exxpression.
+			Eg. li:nth-child(3n + 1):nth-child(even)
+			This behaves like logical AND operator.
+			The first selects all elements in the position 1, 4, 7, 10, 13
+			while the second selects 2, 4, 6, 8, 10.
+			Only the intersection of the both will be selected which will be 4 and 10.
+
+	ii) first-of-type, last-of-type and nth-of-type():
+		:nth-of-type()
+			This selector selects same like nth-child, but it does so not based on child position
+			but based on type of element and position.
+			Eg. div:nth-of-type(2n)
+			The above selector selects div element alone in the position 2, 4, 6, 8, 10.
+			Position is counted based on the element type and not based on all elements.

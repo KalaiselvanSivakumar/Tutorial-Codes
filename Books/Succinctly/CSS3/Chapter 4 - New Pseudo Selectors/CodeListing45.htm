@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>New Pseudo Selectors</title>
+	<style>
+		input:valid {
+			color: green;
+		}
+		input:invalid {
+			background-color: rgb(156, 187, 244);
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<form action="#" method="POST">
+		<label for="userName">User Name</label><br />
+		<input type="text" id="userName" name="userName" required /><br /><br />
+		<label for="email">Email</label><br />
+		<input type="email" id="email" name="email" /><br /><br />
+		<input type="submit" value="Submit" />
+	</form>
+</body>
+</html>

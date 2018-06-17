@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>First, Last and nth child Selectors</title>
+	<style>
+		ul > li:first-child {
+			color: red;
+		}
+		ul > li:last-child {
+			color: green;
+		}
+		/*
+		 * nth-child accepts a parameter.
+		 * 3n denotes multiplications of 3 and apply to all those satisfy this. 
+		 */
+		ul > li:nth-child(3n) {
+			color: blueviolet;
+		}
+		ul > li:nth-child(3n + 2) {
+			color: aqua;
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>List Item One</li>
+		<li>List Item Two</li>
+		<li>List Item Three</li>
+		<li>List Item Four</li>
+		<li>List Item Five</li>
+		<li>List Item Six</li>
+		<li>List Item Seven</li>
+		<li>List Item Eight</li>
+		<li>List Item Nine</li>
+		<li>List Item Ten</li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Custom Checkbox</title>
+	<style>
+		.checkbox {
+			cursor: pointer;
+			display: inline-block;
+			font-size: 20px;
+			font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+		}
+		input[type="checkbox"] {
+			display: none;
+		}
+		.checkbox:before {
+			background-color: green;
+			border-radius: 3px;
+			box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 1px 0px 0px rgba(255, 255, 255, 0.8);
+			color: #F3F3F3;
+			content: "";
+			display: inline-block;
+			height: 18px;
+			width: 18px;
+			vertical-align: middle;
+			text-align: center;
+		}
+		input[type="checkbox"]:checked + .checkbox:before {
+			content: "\2713";
+			font-size: 15px;
+			text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+		}
+	</style>
+</head>
+<body>
+	<form action="#" method="post">
+		<input type="checkbox" name="checkbox1" id="checkbox1">
+		<label for="checkbox1" class="checkbox"> Check box 1</label><br>
+		<input type="checkbox" name="checkbox2" id="checkbox2">
+		<label for="checkbox2" class="checkbox"> Check box 2</label>
+	</form>
+</body>
+</html>
