@@ -111,3 +111,98 @@ Chapter 4 - New Pseudo Selectors:
 			Eg. div:nth-of-type(2n)
 			The above selector selects div element alone in the position 2, 4, 6, 8, 10.
 			Position is counted based on the element type and not based on all elements.
+
+Chapter 5 - Eye Candy:
+1. Border Radius:
+	This applies a curve to the border of specified radius.
+	Eg. border-radius: 10px;
+	The above value will apply to all four corners of the element.
+
+	To specify different value for each corner, use the below one.
+	border-radius: 5px 10px 15px 2px;
+	The order is top-left, top-right, bottom-right and then bottom-left.
+
+	To specify each value separately,
+		border-top-left-radius: 5px;
+		border-top-right-radius: 10px;
+		border-bottom-right-radius: 15px;
+		border-bottom-left-radius: 2px;
+	
+	You can also apply different value for x and y zxis to make it elliptical.
+		border-top-left-radius: 5px 20px;
+		border-top-right-radius: 20px 5px;
+		border-bottom-right-radius: 50px 10px;
+		border-bottom-left-radius: 5px 30px;
+
+2. Drop Shadows:
+	Created using box-shadow property.
+	Accepts four measurements and color value.
+	First two denotes x and y offset values.
+
+	If only first two are specified, then the shadow will take default colour and style,
+	which will look darker in nature.
+	Eg. box-shadow: 10px -10px;
+	Both values accept negative values.
+
+	Third measurement is the blur effect.
+	You cannot use negative blur value.
+	Eg. box-shadoe: 10px -10px 5px;
+
+	Fourth measurement is the spread radius of blur.
+	It will cause the shadow to spread more.
+	Eg. box-shadow: 10px -10px 5px 10px;
+
+	Final thing is the colour of the shadow.
+	Eg. box-shadow: 10px -10px 5px 10px #112345;
+
+	To drop shadows inside the container itself,
+	use inset.
+	Eg. box-shadow: inset 10px -10px 5px 10px;
+
+	Text Shadow:
+	Similar to box-shadow, text-shadow can be used to drop shadow of texts.
+	This shadow follows text's structure.
+	Format of text-shadow:
+	text-shadow: <color> <offsetX> <offsetY> <blurRadius>
+
+3. Gradient:
+	There are three types of gradient.
+	Linear, Radial and Repeated.
+
+	Linear Gradient:
+		background-image: linear-gradient(red, yellow);
+
+		Direction:
+		background-image: linear-gradient(to left, red, yellow);
+		background-image: linear-gradient(to top right, red, yellow);
+		background-image: linear-gradient(to bttom left, red, yellow);
+		background-image: linear-gradient(30deg, red, yellow);
+
+		Multi-color:
+		background-image: linear-gradient(red, orange, yellow, green, blue, indigo, violet);
+			The above will evenly distribute all colours within the height of the element.
+		
+		To set start and end range of the colour, use the following.
+		background-image: linear-gradient(black 0%, green 20%, black 40%, red 100%);
+	
+	Radial Gradient:
+		Radial gradient starts at the middle of the element and gradually spreads around in a circular manner.
+		background-image: radial-gradient(red, yellow);
+
+		Direction:
+		background-image: radial-gradient(at top right, red, yellow);
+		Notice the difference "at" instead of "to".
+
+		Offset:
+		background-image: radial-gradient(at 75% 60%, red, yellow);
+
+		Shape:
+		background-image: radial-gradient(circle at 75% 60%, red, yellow);
+	
+	Repeating Gradient:
+		This gradient must have stop value (i.e. Ranges),
+		otherwise it will look exactly like linear gradient.
+		background-image: repeating-linear-gradient(red 0%, red 10%, yellow 10%, yellow 20%);
+
+		The above says start red from 0% to 10% and yellow from 10% to 20%
+		and repeat the same for the remaining portion.

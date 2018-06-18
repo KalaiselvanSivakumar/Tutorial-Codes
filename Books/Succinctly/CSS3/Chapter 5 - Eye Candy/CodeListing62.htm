@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Box Shadow or Drop Shadow</title>
+	<style>
+		.container {
+			background-color: beige;
+			border: 2px solid  black;
+			display: inline-block;
+			height: 100px;
+			margin: 10px;
+			padding: 5px;
+			text-align: center;
+			width: 100px;
+		}
+
+		.container.topLeftShadow {
+			box-shadow: -10px -10px;
+		}
+		.container.topRightShadow {
+			box-shadow: 10px -10px;
+		}
+		.container.bottomRightShadow {
+			box-shadow: 10px 10px;
+		}
+		.container.bottomLeftShadow {
+			box-shadow: -10px 10px;
+		}
+
+		.container.blurSpread.topLeftShadow {
+			box-shadow: -10px -10px 5px 5px #FF0000;
+		}
+		.container.blurSpread.topRightShadow {
+			box-shadow: 10px -10px 10px 15px #00FF00;
+		}
+		.container.blurSpread.bottomRightShadow {
+			box-shadow: 10px 10px 10px 5px #0000FF;
+		}
+		.container.blurSpread.bottomLeftShadow {
+			box-shadow: -10px 10px 10px 5px #FFFF00;
+		}
+
+		.container.insetBlurSpread.bottomLeftShadow {
+			box-shadow: inset -10px 10px 10px 5px #FFFF00;
+		}
+	</style>
+</head>
+<body>
+	<div class="container topLeftShadow">
+		<p>This is a sample text.</p>
+	</div>
+	<div class="container bottomLeftShadow">
+		<p>This is a sample text.</p>
+	</div>
+	<div class="container bottomRightShadow">
+		<p>This is a sample text.</p>
+	</div>
+	<div class="container topRightShadow">
+		<p>This is a sample text.</p>
+	</div>
+	<br><br><br>
+	<div class="container blurSpread topLeftShadow">
+		<p>This is a sample text.</p>
+	</div>
+	<div class="container blurSpread bottomLeftShadow">
+		<p>This is a sample text.</p>
+	</div>
+	<div class="container blurSpread bottomRightShadow">
+		<p>This is a sample text.</p>
+	</div>
+	<div class="container blurSpread topRightShadow">
+		<p>This is a sample text.</p>
+	</div>
+	<br><br><br>
+	<div class="container insetBlurSpread bottomLeftShadow">
+		<p>This is a sample text.</p>
+	</div>
+</body>
+</html>
