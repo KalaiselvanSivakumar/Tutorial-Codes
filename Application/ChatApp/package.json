@@ -4,7 +4,7 @@
   "description": "\"An application to chat with you colleague in a private manner\"",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/server/server.ts"
+    "start": "ts-node src/server.ts"
   },
   "author": "Kalai selvan Sivakumar",
   "license": "ISC",
