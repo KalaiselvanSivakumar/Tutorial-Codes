@@ -206,3 +206,55 @@ Chapter 5 - Eye Candy:
 
 		The above says start red from 0% to 10% and yellow from 10% to 20%
 		and repeat the same for the remaining portion.
+
+8. Generated Content and Calculations:
+	Using generated content module, we can read the value of an parent attribute and use it further down the chain.
+	Also we can initialise and use counters, auto-generate sequential numbers.
+
+	Counters:
+		Initialised using "counter-reset" rule and incremented using "counter-increment" rule.
+		To get value of counter, "counter()" function can be used.
+
+		First step is to initialise the counter for each list.
+		For eg., when we encounter dl element, we can initialise the counter to 0 using below rule.
+		dl {
+			counter-reset: dtcount 0;
+		}
+			In the above, dl is the type of element, counter-reset is the CSS property,
+			dtcount is the variable and 0 is the initial value.
+		
+		To increase the counter and add it to the element,
+		dt:before {
+			content: counter(dtcount)". ";
+			counter-increment: dtcount;
+		}
+			In the above, dt is the type of element, before is the pseudo selector to display content,
+			content property allows to display content for that pseudo element, counter() is the CSS function to get value,
+			dtcount is the variable which contains counter value, ". " is the extra string appended along with counter value,
+			counter-increment is the CSS property to increment the counter and dtcount again is the variable
+			to which counter value must be incremented.
+		
+		To increment or decrement by a factor,
+			counter-increment: dtcount 4;
+			counter-increment: dtcount -4;
+	
+	Calc:
+		width: calc(100% - 40px);
+		This will give the width after doing math.
+	
+	Element Attributes:
+	HTML5 supports data attributes to store data in the element.
+	Like data-* where * means any text.
+	Eg.
+		<h1 data-someholder="somevalue"></h1>
+		<div data-fontSize="15px"></div>
+	These attributes can be use in CSS with attr() function.
+
+	Eg.
+		h1:before {
+			color: attr(data-fontColor);
+		}
+			The above will get value from the attribute of the element and assign it to the color CSS property.
+			Currently, only pseudo selectors before and after have the permission to use it content generation.
+			color, size or any other property value setting will not work.
+	
