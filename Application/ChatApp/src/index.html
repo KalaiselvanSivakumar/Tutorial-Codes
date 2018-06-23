@@ -36,6 +36,18 @@
 
 		function sendChat(content) {
 			console.log(content);
+			$.post("http://localhost:3020/chats", content);
+		}
+
+		function getChat() {
+			$.get('/chats', (chats) => {
+				chats.forEach(displayChat);
+			});
+		}
+
+		function displayChat(chatObj) {
+			var displayEl = document.getElementById('messages');
+			displayEl.innerHTML += `<h5>${chatObj.name} </h5><p>${chatObj.message}</p>`;
 		}
 
 		function main() {
