@@ -40,18 +40,22 @@
 		}
 
 		function getChat() {
+			displayEl.innerHTML = '';
 			$.get('/chats', (chats) => {
 				chats.forEach(displayChat);
 			});
 		}
 
 		function displayChat(chatObj) {
-			var displayEl = document.getElementById('messages');
 			displayEl.innerHTML += `<h5>${chatObj.name} </h5><p>${chatObj.message}</p>`;
 		}
 
+		var displayEl;
+
 		function main() {
-			console.log("DOM Content is loaded. Application is ready to use now");
+			console.log('DOM Content is loaded. Application is ready to use now');
+
+			displayEl = document.getElementById('messages');
 
 			var sendButton = document.getElementById('send');
 			sendButton.addEventListener('click', () => {
