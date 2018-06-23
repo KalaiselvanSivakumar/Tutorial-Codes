@@ -16,7 +16,7 @@
 		<div class="jumbotron">
 			<h1 class="display-4">Start Chatting</h1>
 			<br>
-			<input type="text" name="txtName" id="txtName" class="form-control" placeholder="name">
+			<input type="text" name="txtName" id="txtName" class="form-control" placeholder="Name">
 			<br>
 			<textarea name="txtMessage" id="txtMessage" class="form-control" placeholder="Message"></textarea>
 			<br>
@@ -24,5 +24,34 @@
 		</div>
 		<div id="messages"></div>
 	</div>
+	<script>
+		function onReady(callBackFunction) {
+			if (document.readyState != 'loading') {
+				callBackFunction();
+			}
+			else {
+				document.addEventListener('DOMContentLoaded', callBackFunction);
+			}
+		}
+
+		function sendChat(content) {
+			console.log(content);
+		}
+
+		function main() {
+			console.log("DOM Content is loaded. Application is ready to use now");
+
+			var sendButton = document.getElementById('send');
+			sendButton.addEventListener('click', () => {
+				var chatContent = {
+					name	: document.getElementById('txtName').value,
+					message	: document.getElementById('txtMessage').value
+				}
+				sendChat(chatContent);
+			});
+
+		}
+		onReady(main);
+	</script>
 </body>
 </html>
