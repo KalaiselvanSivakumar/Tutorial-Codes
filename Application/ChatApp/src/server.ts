@@ -1,11 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
-
+import http from 'http';
+import socketIO from 'socket.io';
 
 var app = express();
 
-var conString = "mongodb://kalai:kalai123@localhost:27017/chatappdb";
+var dbConnectionURL = "mongodb://kalai:kalai123@localhost:27017/chatappdb";
 
 app.use(express.static(__dirname));
 
@@ -29,11 +30,17 @@ var chatSchema = new mongoose.Schema({
 
 var Chats = mongoose.model<IChatModel>("chats", chatSchema);
 
-mongoose.connect(conString,
+mongoose.connect(dbConnectionURL,
 	(err) => {
 		console.log("Database connnection", err);
 	}
 );
+
+var httpServer = new http.Server(app);
+var io = socketIO(httpServer);
+io.on('connection', (socket: any) => {
+	console.log('Socket is connected...', socket);
+});
 
 app.post('/chats', async (req, res) => {
 	console.log(req.body);
@@ -41,6 +48,9 @@ app.post('/chats', async (req, res) => {
 		var chat = new Chats(req.body);
 		await chat.save();
 		res.sendStatus(200);
+
+		// Emit the event
+		io.emit('chat', req.body);
 	}
 	catch (err) {
 		res.sendStatus(500);
@@ -60,6 +70,6 @@ app.get('/chats', async (req, res) => {
 	});
 });
 
-app.listen(3020, () => {
-	console.log('Listening in the port 3020');
+var server = httpServer.listen(3020, () => {
+	console.log('Listening on the port', server.address());
 });

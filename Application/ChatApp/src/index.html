@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="./bootstrap.min.css">
 	<script src="./jquery-3.2.1.min.js"></script>
 	<script src="./popper.min.js"></script>
+	<script src="socket.io.js"></script>
 	<script src="./bootstrap.min.js"></script>
 </head>
 <body>
@@ -36,7 +37,7 @@
 
 		function sendChat(content) {
 			console.log(content);
-			$.post("http://localhost:3020/chats", content);
+			$.post("/chats", content);
 		}
 
 		function getChat() {
@@ -68,6 +69,9 @@
 
 		}
 		onReady(main);
+
+		var socket = io();
+		socket.on('chat', getChat);
 	</script>
 </body>
 </html>
