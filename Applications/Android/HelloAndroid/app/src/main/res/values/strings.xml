@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HelloAndroid</string>
+    <string name="next_page_button">Next Page</string>
 </resources>
