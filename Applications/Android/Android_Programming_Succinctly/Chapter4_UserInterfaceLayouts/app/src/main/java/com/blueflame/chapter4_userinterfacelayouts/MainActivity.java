@@ -10,13 +10,20 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Locale;
+
 public class MainActivity extends Activity {
 
 	private static final String TAG = MainActivity.class.getName();
+	private ArrayList<String> editableData;
+	private ArrayAdapter<String> editableAdapter;
+	private int count;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		// Normal Linear Layout
         /*
 		setContentView(R.layout.activity_main);
@@ -24,6 +31,7 @@ public class MainActivity extends Activity {
 
 
 
+        /*
         // List View
 //		setContentView(R.layout.activity_listview);
 
@@ -61,6 +69,33 @@ public class MainActivity extends Activity {
 					}
 				}
 		);
+		*/
 
+        setContentView(R.layout.activity_edit_data_set);
+
+        this.editableData = new ArrayList<>();
+		editableData.add("Item 1");
+		editableData.add("Item 2");
+		editableData.add("Item 3");
+		this.count = 3;
+
+		editableAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, editableData);
+		GridView editableGridView = findViewById(R.id.editableGridView);
+		editableGridView.setAdapter(editableAdapter);
+
+		editableGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				editableData.remove(position);
+				editableAdapter.notifyDataSetChanged();
+			}
+		});
+	}
+
+	public void addItem(View view) {
+		count++;
+		String newItem = String.format(Locale.US, "Item %d", count);
+		editableData.add(newItem);
+		editableAdapter.notifyDataSetChanged();
 	}
 }
