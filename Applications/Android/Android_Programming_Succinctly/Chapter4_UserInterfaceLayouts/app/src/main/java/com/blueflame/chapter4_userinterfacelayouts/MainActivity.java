@@ -2,11 +2,17 @@ package com.blueflame.chapter4_userinterfacelayouts;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
+
+	private static final String TAG = MainActivity.class.getName();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +33,9 @@ public class MainActivity extends Activity {
 		// Data set for ListView
 		String[] data = new String[]
 				{
-						"Item 1", "Item 2", "Item 3",
-						"Item 4", "Item 5", "item 6",
-						"Item 7", "Item 8", "item 9"
+					"Item 1", "Item 2", "Item 3",
+					"Item 4", "Item 5", "item 6",
+					"Item 7", "Item 8", "item 9"
 				};
 
 		// Data set passed to Adapter to create View objects
@@ -44,6 +50,17 @@ public class MainActivity extends Activity {
 		// Grid View
 		GridView gridView = findViewById(R.id.gridView);
 		gridView.setAdapter(adapter);
+
+		// On-click listener attachment
+		gridView.setOnItemClickListener(
+				new AdapterView.OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+						TextView selectedView = (TextView) view;
+						Log.d(TAG, String.format("You clicked: %s", selectedView.getText()));
+					}
+				}
+		);
 
 	}
 }
