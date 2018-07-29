@@ -18,6 +18,8 @@ public class MainActivity extends Activity {
 	private static final String TAG = MainActivity.class.getName();
 	private ArrayList<String> editableData;
 	private ArrayAdapter<String> editableAdapter;
+	private ArrayList<ContactDataItem> contactDataItems;
+	private ContactListAdapter contactListAdapter;
 	private int count;
 
 	@Override
@@ -71,6 +73,8 @@ public class MainActivity extends Activity {
 		);
 		*/
 
+        // Editable grid view
+		/*
         setContentView(R.layout.activity_edit_data_set);
 
         this.editableData = new ArrayList<>();
@@ -90,6 +94,20 @@ public class MainActivity extends Activity {
 				editableAdapter.notifyDataSetChanged();
 			}
 		});
+		*/
+
+		// Custom ListView and Adapter
+		setContentView(R.layout.activity_listview);
+
+		this.contactDataItems = new ArrayList<>();
+		this.contactDataItems.add(new ContactDataItem("Kalai selvan", "123456789"));
+		this.contactDataItems.add(new ContactDataItem("Santhosh", "987654321"));
+		this.contactDataItems.add(new ContactDataItem("Dummy Person", "987651234"));
+
+		contactListAdapter = new ContactListAdapter(this, contactDataItems);
+		ListView contactListView = findViewById(R.id.listView);
+		contactListView.setAdapter(contactListAdapter);
+
 	}
 
 	public void addItem(View view) {
