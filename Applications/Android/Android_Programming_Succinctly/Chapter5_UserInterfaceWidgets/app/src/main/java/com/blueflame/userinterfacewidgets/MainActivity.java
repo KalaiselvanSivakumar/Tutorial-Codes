@@ -11,14 +11,18 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_imageview);
 
+		// Image View
+		/*
+		setContentView(R.layout.activity_imageview);
 		// Image View - Image source setting programmatically
 		ImageView imageView = findViewById(R.id.imageView);
 		Resources resources = getResources();
 		Drawable image = resources.getDrawable(R.drawable.ic_launcher_foreground);
 		// Uncomment below line to set different image in the ImageView
 //		imageView.setImageDrawable(image);
+		*/
 
+		setContentView(R.layout.activity_button);
 	}
 }
