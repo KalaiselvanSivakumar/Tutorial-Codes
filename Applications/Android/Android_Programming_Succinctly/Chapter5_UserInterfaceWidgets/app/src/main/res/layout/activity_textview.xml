@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<!-- Text size must be in sp (scaled pixed). But dp, px is also available -->
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="Look, a big red serif font"
+		android:textSize="20sp"
+		android:textColor="#FFFF0000"
+		android:textStyle="italic"
+		android:typeface="serif"
+		android:textIsSelectable="true" />
+
+	<EditText
+		android:id="@+id/editText"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:hint="Click here to edit the text"
+		android:inputType="text|textCapCharacters|textAutoCorrect"
+		android:imeOptions="actionSend" />
+
+</LinearLayout>
