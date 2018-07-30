@@ -14,6 +14,8 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
@@ -62,12 +64,22 @@ public class MainActivity extends Activity {
 		});
 		*/
 
+		/*
+		// Checkbox
 		setContentView(R.layout.activity_checkbox);
 		isGreen = false;
 		isBold = false;
 		isBig = false;
 		synchronizeCheckBoxes();
 		synchronizeTextView();
+		*/
+
+		// Radio Group and Radio Button
+		setContentView(R.layout.activity_radiobutton);
+		// Set the initial selection
+		RadioButton serif = findViewById(R.id.radioButtonSerif);
+		serif.setChecked(true);
+		radioButtonClickHandler(null);
 
 	}
 
@@ -106,5 +118,25 @@ public class MainActivity extends Activity {
 				break;
 		}
 		synchronizeTextView();
+	}
+
+	public void radioButtonClickHandler(View view) {
+		RadioGroup radioGroup = findViewById(R.id.radioGroup);
+		String typeface;
+		switch (radioGroup.getCheckedRadioButtonId()) {
+			case R.id.radioButtonSans:
+				typeface = "sans";
+				break;
+			case R.id.radioButtonSerif:
+				typeface = "serif";
+				break;
+			case R.id.radioButtonMonoSpace:
+				typeface = "monospace";
+				break;
+			default:
+				typeface = "default";
+		}
+		TextView textView = findViewById(R.id.radioText);
+		textView.setTypeface(Typeface.create(typeface, Typeface.NORMAL));
 	}
 }
