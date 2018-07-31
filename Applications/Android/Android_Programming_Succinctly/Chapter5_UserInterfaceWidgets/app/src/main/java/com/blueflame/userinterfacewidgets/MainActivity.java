@@ -11,12 +11,17 @@ import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
@@ -74,12 +79,33 @@ public class MainActivity extends Activity {
 		synchronizeTextView();
 		*/
 
+		/*
 		// Radio Group and Radio Button
 		setContentView(R.layout.activity_radiobutton);
 		// Set the initial selection
 		RadioButton serif = findViewById(R.id.radioButtonSerif);
 		serif.setChecked(true);
 		radioButtonClickHandler(null);
+		*/
+
+		setContentView(R.layout.activitiy_spinner);
+
+		ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.spinner_colors, android.R.layout.simple_spinner_item);
+		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+		Spinner spinner = findViewById(R.id.colorSpinner);
+		spinner.setAdapter(spinnerAdapter);
+
+		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				String selectedColor = (String) parent.getItemAtPosition(position);
+				setTextColor(selectedColor);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) { }
+		});
 
 	}
 
@@ -138,5 +164,33 @@ public class MainActivity extends Activity {
 		}
 		TextView textView = findViewById(R.id.radioText);
 		textView.setTypeface(Typeface.create(typeface, Typeface.NORMAL));
+	}
+
+	public void setTextColor(String color) {
+		String hexColor;
+		switch (color) {
+			case "Red":
+				hexColor = "#FFAA0000";
+				break;
+			case "Orange":
+				hexColor = "#FFCC6600";
+				break;
+			case "Yellow":
+				hexColor = "#FFCCAA00";
+				break;
+			case "Green":
+				hexColor = "#FF00AA00";
+				break;
+			case "Blue":
+				hexColor = "#FF0000AA";
+				break;
+			case "Violet":
+				hexColor = "#FF6600AA";
+				break;
+			default:
+				hexColor = "#FF000000";
+		}
+		TextView textView = findViewById(R.id.spinnerText);
+		textView.setTextColor(Color.parseColor(hexColor));
 	}
 }

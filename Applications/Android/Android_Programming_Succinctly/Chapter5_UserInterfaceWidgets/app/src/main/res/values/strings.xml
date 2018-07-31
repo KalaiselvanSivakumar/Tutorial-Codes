@@ -1,3 +1,11 @@
 <resources>
 	<string name="app_name">User Interface WIdgets</string>
+	<string-array name="spinner_colors">
+		<item>Red</item>
+		<item>Orange</item>
+		<item>Yellow</item>
+		<item>Green</item>
+		<item>Blue</item>
+		<item>Violet</item>
+	</string-array>
 </resources>
