@@ -71,5 +71,5 @@ setInterval(() => {
 		...state.list,
 		getRandomItemFromList(state.list)
 	];
-	render(state)
+	render(state);
 }, 1000);

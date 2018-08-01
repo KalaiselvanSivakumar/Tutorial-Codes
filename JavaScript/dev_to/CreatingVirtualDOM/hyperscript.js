@@ -1,5 +1,4 @@
 /**
- * 
  * @param {string} nodeName 
  * @param {Object} attrs 
  * @param {HTMLElement | string} children 
