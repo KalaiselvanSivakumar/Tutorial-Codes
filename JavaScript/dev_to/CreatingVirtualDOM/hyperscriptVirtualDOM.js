@@ -3,6 +3,6 @@
  * @param {Object} attributes 
  * @param {HTMLElement | string} children 
  */
-export default function hyperscript(nodeName, attributes, ...children) {
+export default function hyperscriptVirtualDOM(nodeName, attributes, ...children) {
 	return { nodeName, attributes, children };
 }
