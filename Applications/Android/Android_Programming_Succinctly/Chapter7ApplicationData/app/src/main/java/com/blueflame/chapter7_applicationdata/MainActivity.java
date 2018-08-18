@@ -1,7 +1,10 @@
 package com.blueflame.chapter7_applicationdata;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -16,6 +19,7 @@ public class MainActivity extends Activity {
 
 	private static String SHARED_PREFS_KEY = "existingInput";
 	private static String FILENAME = "internalStorage";
+	private static String AUTHOR_NAME = "Kalai selvan Sivakumar";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class MainActivity extends Activity {
 				// Logging the current key
 				String value = getPreferences(MODE_PRIVATE).getString(SHARED_PREFS_KEY, "No saved data");
 				Log.d(MainActivity.class.getName(), value);
+				saveStringWithDatabase(input);
 
 				FileInputStream inputStream = null;
 				try {
@@ -85,6 +90,41 @@ public class MainActivity extends Activity {
 		byte[] data = value.getBytes();
 		outputStream.write(data);
 		outputStream.close();
+	}
+
+	public void saveStringWithDatabase(String value) {
+		// Storing the values in ContentValues object
+		ContentValues values = new ContentValues();
+		values.put(MessageOpenHelper.COLUMN_AUTHOR, AUTHOR_NAME);
+		values.put(MessageOpenHelper.COLUMN_MESSAGE, value);
+
+		MessageOpenHelper dbHelper = new MessageOpenHelper(this);
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		long id = db.insert(MessageOpenHelper.TABLE_MESSAGES, null, values);
+		Log.d(MainActivity.class.getName(), String.format("Saved new record to database with ID: %d", id));
+		dbHelper.close();
+	}
+
+	public void readDataFromDataBase() {
+		// Load the most recent record from the SQLite Database
+		MessageOpenHelper dbHelper = new MessageOpenHelper(this);
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+		// Fetch the records with the appropriate author name
+		String[] columns = {
+				MessageOpenHelper.COLUMN_ID,
+				MessageOpenHelper.COLUMN_MESSAGE
+		};
+		String selection = MessageOpenHelper.COLUMN_AUTHOR + " = '" + AUTHOR_NAME + "'";
+		Cursor cursor = db.query(MessageOpenHelper.TABLE_MESSAGES, columns, selection, null, null, null, null);
+		// Log the most recent record
+		cursor.moveToLast();
+		long id = cursor.getLong(0);
+		String message = cursor.getString(1);
+		Log.d(MainActivity.class.getName(), String.format("Retrieved info from database. ID: %d Message: %s", id, message));
+		// Clean up
+		cursor.close();
+		dbHelper.close();
 	}
 
 }
