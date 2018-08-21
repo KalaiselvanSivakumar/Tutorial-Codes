@@ -18,7 +18,21 @@ export function activate(context: vscode.ExtensionContext) {
         // The code you place here will be executed every time your command is executed
 
         // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World!');
+		vscode.window.showInformationMessage('Hello World!');
+		
+		// Numer of characters selected in the editor - Tutorial
+		let editor = vscode.window.activeTextEditor;
+		if (!editor) {
+			return; // No open text editor
+		}
+
+		// Get the selected portion
+		let selection = editor.selection;
+		// Selected text
+		let text = editor.document.getText(selection);
+
+		// Display a message box to the user
+		vscode.window.showInformationMessage('Selected characters: ' + text.length);
     });
 
     context.subscriptions.push(disposable);
