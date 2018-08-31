@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Set of balls rolling</title>
+	<style>
+		body {
+			align-items: center;
+			background-color: blueviolet;
+			display: flex;
+			justify-content: center;
+			min-height: 100vh;
+		}
+
+		div {
+			border-radius: 100%;
+			box-sizing: border-box;
+			margin: 2px;
+			position: absolute;
+		}
+
+		.wrapper {
+			animation-name: earth-worm-x;
+			animation-direction: alternate;
+			animation-duration: 1.5s;
+			animation-fill-mode: both;
+			animation-iteration-count: infinite;
+			animation-timing-function: ease-in-out;
+		}
+
+		.wrapper > div {
+			animation-name: earth-worm-y;
+			animation-duration: 1.5s;
+			animation-fill-mode: both;
+			animation-iteration-count: infinite;
+			animation-timing-function: linear;
+			background-color: aliceblue;
+		}
+
+		div:nth-of-type(1) > div {
+			height: 40px;
+			width: 40px;
+			opacity: 0.9;
+		}
+		div:nth-of-type(2) > div {
+			height: 35px;
+			width: 35px;
+			opacity: 0.8;
+		}
+		div:nth-of-type(3) > div {
+			height: 30px;
+			width: 30px;
+			opacity: 0.7;
+		}
+		div:nth-of-type(3) > div {
+			height: 25px;
+			width: 25px;
+			opacity: 0.6;
+		}
+		div:nth-of-type(4) > div {
+			height: 20px;
+			width: 20px;
+			opacity: 0.5;
+		}
+		div:nth-of-type(5) > div {
+			height: 15px;
+			width: 15px;
+			opacity: 0.4;
+		}
+
+		div:nth-child(2),
+		div:nth-child(2) > div {
+			animation-delay: 0.1s;
+		}
+		div:nth-child(3),
+		div:nth-child(3) > div {
+			animation-delay: 0.2s;
+		}
+		div:nth-child(4),
+		div:nth-child(4) > div {
+			animation-delay: 0.3s;
+		}
+		div:nth-child(5),
+		div:nth-child(5) > div {
+			animation-delay: 0.4s;
+		}
+
+		@keyframes earth-worm-x {
+			0% {
+				transform: translateX(-150px);
+			}
+			100% {
+				transform: translateX(150px);
+			}
+		}
+
+		@keyframes earth-worm-y {
+			0%, 50%, 100% {
+				transform: translateY(0px);
+			}
+			25% {
+				transform: translateY(-150px);
+			}
+			75% {
+				transform: translateY(150px)
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<div></div>
+	</div>
+	<div class="wrapper">
+		<div></div>
+	</div>
+	<div class="wrapper">
+		<div></div>
+	</div>
+	<div class="wrapper">
+		<div></div>
+	</div>
+	<div class="wrapper">
+		<div></div>
+	</div>
+</body>
+</html>
