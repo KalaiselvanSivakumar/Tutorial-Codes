@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Default Order</title>
+	<style>
+	.pink, .blue, .orange, .purple {
+		position: absolute;
+	}
+
+	.pink {
+		top: 70px;
+		left: 70px;
+		background: rgb(239, 71, 111);
+	}
+
+	.blue {
+		top: 100px;
+		left: 100px;
+		background: rgb(17, 138, 178);
+	}
+
+	.green {
+		background: rgb(6, 214, 160);
+	}
+
+	.orange {
+		height: 100px;
+		width: 100px;
+		background: rgb(255, 209, 102);
+		font-size: 14px;
+	}
+
+	.purple {
+		background: rgb(139, 91, 211);
+		top: 40px;
+		left: 40px;
+	}
+
+	div {
+		height: 150px;
+		width: 150px;
+		color: white;
+		font-family: "Courier New", Courier, monospace;
+		text-align: right;
+		padding: 5px;
+		box-sizing: border-box;
+	}
+
+	.purple {
+		z-index: 0;
+	}
+
+	.pink {
+		z-index: 1; /* Creates new Stacking Context */
+	}
+
+	.blue {
+		z-index: 2;
+	}
+
+	.orange {
+		z-index: 3;
+	}
+	.green {
+		z-index: 100; /* Has no effect since the green box is non-positioned */
+	}
+	</style>
+</head>
+<body>
+	<!-- 1. Root element, 2. Non-positioned elements, 3. Positioned elements -->
+	<div class="pink">
+		Positioned
+		<div class="orange">Positioned</div>
+	</div>
+	<!-- Blue box now comes before yellow even though stack index is larger -->
+	<!-- This is because, once stack index is assigned to an element, all its child will be within the stack index -->
+	<div class="blue">Positioned</div>
+	<div class="purple">Positioned</div>
+	<div class="green">Non-positioned</div>
+</body>
+</html>
