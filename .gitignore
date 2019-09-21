@@ -12,3 +12,9 @@ node_modules
 .antsetup
 .metadata
 .recommenders
+
+# Class files
+**/classes/**/*.class
+
+# IntelliJ files
+**/.idea/
