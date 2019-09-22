@@ -66,14 +66,15 @@ $list: (10, 20px);
 @function multiply($a, $b) {
     @return ($a * $b);
 }
-$value: multiple($list…); // nth($list, 1), nth($list, 2) is passed
+$value: multiple($list...); // nth($list, 1), nth($list, 2) is passed
 
 // Map spreading
 $map: (
-    height: 200px,
-    width: 100px
+    "height": 200px,
+    "width": 100px
 );
 @function area($width, $height) {
     @return ($width * $height);
 }
-$area-calculated: area(map...); // map-get($map, ‘width’), map-get($map, ‘height’) is passed
+
+$area-calculated: area($map...); // map-get($map, ‘width’), map-get($map, ‘height’) is passed
