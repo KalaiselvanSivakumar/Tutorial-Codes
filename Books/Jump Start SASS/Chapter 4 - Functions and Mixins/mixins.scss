@@ -1,0 +1,58 @@
+/// Position the element vertically center using transform property
+@mixin position-vertical-center {
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+/// Adding width and height properties
+/// If the height is omitted, then it will be same as width
+/// @param {Length} $width - Width of the element
+/// @param {Length} $height [$width] - Height of the element
+@mixin box-size($width, $height: $width) {
+	width: $width;
+	height: $height;
+}
+
+.foo {
+	@include position-vertical-center;
+}
+
+.bar-rectangle {
+	@include box-size(200px, 100px);
+}
+
+.bar-square {
+	@include box-size(50px);
+}
+
+@mixin dynamic-content {
+	&.hover,
+	&.active,
+	&.focus {
+		@content;
+	}
+}
+
+.colored-foo {
+	color: blue;
+	@include dynamic-content {
+		color: red;
+	}
+}
+
+@mixin arguments-content($width) {
+	$height: 100px;
+	@content;
+}
+
+/// Below will not work as the content passed is off different context.
+/// Both variables are not accessible.
+/*
+.foo-wont-work {
+	@include arguments-content(100px) {
+		width: $width;
+		height: $height;
+	}
+}
+*/

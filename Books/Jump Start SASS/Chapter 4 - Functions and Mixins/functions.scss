@@ -1,0 +1,79 @@
+.foo {
+    color: darken(#239823, 20%);
+}
+
+// Function with no parameters
+@function get-image-base-url() {
+	@return '/images/'; // All functions must return some values
+}
+
+.foo {
+	background-image: url('#{get-image-base-url()}foo.png');
+}
+
+// Function with parameters
+@function subtract($a, $b) {
+	@return ($a - $b); // Using parentheses is a wise option as '/' will not work without parentheses
+}
+
+// Function with default parameters - Optional Parameters
+@function multiply($a, $b: 2) { // Here $a is mandatory and $b is optional with a default value of 2
+	@return ($a * $b);
+}
+
+// Calling functions
+.bar {
+	$first-size: 200px;
+	$second-size: 100px;
+	width: subtract($first-size, $second-size);
+	height: multiply($second-size); // Calling function with optional parameter
+	margin: subtract($b: $second-size, $a: $first-size); // Calling function using keyword arguments (aka named arguments)
+}
+
+@function color-manipulation(
+    $primary,
+    $secondary: darken($primary, 20%),
+    $tertiary: lighten($primary, 20%)
+) {
+    // Some logic goes here
+    @return $primary;
+}
+$color-theme: color-manipulation(red, $tertiary: blue); // Note: Here only for third argument is used.
+
+// Variable number of arguments
+@function variable-arguments-function($param1, $remaining-args...) {
+	@return nth($list: $remaining-args, $n: $param1);
+}
+
+// Spreading a list for variable-arguments-function
+@function spreading-list-function() {
+	$list: (1, 2, 3, 4);
+	@return variable-arguments-function(4, $list...);
+}
+
+.variable-arguments {
+	height: spreading-list-function() * 1px;
+}
+
+// Creating alias for a function
+@function alias-color($arguments...) {
+    $type-of-arguments: type-of($arguments); // arglist
+    @return some-other-function($arguments…); // Values are spread and passed
+}
+
+// List spreading
+$list: (10, 20px);
+@function multiply($a, $b) {
+    @return ($a * $b);
+}
+$value: multiple($list…); // nth($list, 1), nth($list, 2) is passed
+
+// Map spreading
+$map: (
+    height: 200px,
+    width: 100px
+);
+@function area($width, $height) {
+    @return ($width * $height);
+}
+$area-calculated: area(map...); // map-get($map, ‘width’), map-get($map, ‘height’) is passed
