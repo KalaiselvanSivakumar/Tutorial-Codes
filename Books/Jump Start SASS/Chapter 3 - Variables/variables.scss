@@ -1,0 +1,146 @@
+// Variable declaraion
+// All variables declared outside any container or class are taken as global variable
+$global-variable: 100;
+.foo {
+    $local-variable: 1px;
+    width: $global-variable * $local-variable;
+}
+
+// Global and local variables can have same name
+// and in that case, local variables shadow the global variables. i.e. Hide global variables
+// width variable declared globally
+$width: 200px;
+.bar {
+    // width variable declared locally. Shadows global variable
+    $width: 100px;
+    width: $width;
+}
+
+// Outside the bar class, width still remains 200px
+
+// To overwrite global variable inside any class or function, use !global
+.overwrite-bar {
+    $width: 100px !global;
+    width: $width;
+}
+.current-bar {
+    width: $width; // 100px as it is overwritten
+}
+
+/// Data types and sample values
+$number1: 100;
+$number2: 2px;
+$string1: Hello;
+$string2: 'Hello';
+$string3: "Hello"; // Always prefer double quotes
+$boolean1: true;
+$boolean2: false;
+$null-value: null;
+$list1: (1, 2, 3);
+$list2: (1 2 3);
+$list3: 1, 2, 3; // Parentheses is optional
+$list4: 1 2 3;
+$list5: (); // Empty list
+$number3: (1); // Parentheses won't make it as list
+$list6: (1,);
+$map1: (
+    'height': 100px,
+    'width': 200px
+);
+$color1: pink;
+$color2: rgb(200, 12, 45);
+$color3: hsl(200,  19, 100);
+$color4: #871265;
+
+$add: 1px + 2px;
+$sub: 100 - 50;
+$multiply: 100px * 2;
+
+// Division is performed on these three conditions
+$divide1: (100px / 2);
+$divide2: $sub / 2;
+$divide3: 1 + 100px / 2;
+
+// No division performed
+$no-division: 1000px / 2;
+
+
+.foo {
+    $gap: 20px;
+    // No variable or parentheses: no division performed
+    font: 16px / 2 sans-serif;
+    // Wrapping parentheses: division returning 8px
+    padding: (16px / 2);
+    // Variable is used: division returning 10px
+    margin: $gap / 2;
+    // Arithmetic expression: calculation returning 308px;
+    width: 300px + 16px / 2;
+}
+
+$initial-value: 42;
+$value-in-px: $initial-value * 1px; // 42px
+$unitless-value: $value-in-px / 1px; // 42
+
+// Lists can contain any values and even a list again. i.e. Nested lists
+$list: (42, pink, ‘Hello World’);
+
+$list: Hello World;
+$type: type-of($list); // list
+$length: length($list); // 2
+$delimiter: list-separator($list); // space
+
+$themes: (
+    ‘info’: deepskyblue,
+    ‘danger’: tomato,
+    "warning": gold,
+    ‘confirm’: lightgreen,
+);
+// To get the value corresponding to a key
+.message-info {
+    $color: map-get($themes, "info");
+}
+
+$padding: 10px;
+// Assign a value only when it is not assigned previously
+// null value will be treated as unassigned and default value will be taken
+$padding: 20px !default; // If the above statement is remvoed, padding will take 20px as value.
+.foo {
+    padding: $padding; // 10px
+}
+
+/* Interpolation */
+
+// Without interpolation
+$value: "Kalai";
+.foo {
+    content: "Hello " + $value + "!"; // Hello Kalai!
+}
+
+// With interpolation
+.bar {
+    content: "Hello #{$value}!"; // Hello Kalai!
+}
+
+// This will not work
+$width: 200px;
+.foo {
+    width: calc(100% - $width); // calc(100% - $width)
+}
+
+// With interpolation
+.bar {
+    width: calc(100% - #{$width}); // calc(100% - 200px)
+}
+
+$media: screen;
+$feature: min-width;
+$value: 1280px;
+@media ($media) and ($feature: $value) {} // @media (screen) and (min-width: 1280px) {}
+
+// But screen should not be wrapped inside parentheses. So we have to interpolate it.
+@media #{$media} and ($feature: $value) {} // @media screen and (min-width: 1280px) {}
+
+$section: ‘home’;
+.section-#{$section} { // .section-home
+    color: white;
+}
