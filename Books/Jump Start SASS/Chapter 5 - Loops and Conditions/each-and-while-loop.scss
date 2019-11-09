@@ -1,0 +1,70 @@
+$list: (32px, 24px, 16px);
+
+// Iterating over an one dimensional list using each loop
+@each $size in $list {
+	.label-#{$size / 1px} {
+		font-size: $size;
+	}
+}
+
+$map: (
+	color: red,
+	background-color: blue
+);
+
+// Iterating over a map using each loop and single variable
+.foo {
+	@each $entry in $map {
+		#{nth($entry, 1)}: nth($list: $entry, $n: 2);
+	}
+}
+
+// Iterating over a map using two variables - each loop
+// Same as above but with more readability
+.bar {
+	@each $property, $value in $map {
+		#{$property}: $value;
+	}
+}
+
+$two-dimensional-list: (
+	(color, red),
+	(font-size, 24px)
+);
+
+// Iterating over a two dimensional list
+// Same as above although map is preferred for these kind of stuffs
+.foo-two-dimensional-list {
+	@each $property, $value in $two-dimensional-list {
+		#{$property}: $value;
+	}
+}
+
+// Iteraing a map of maps
+$authors: (
+    "Kalai": (
+        "filename": "kalai_selvan.jpg",
+        "color": lightblue
+    ),
+    "Santhosh": (
+        "filename": "santhosh.jpg",
+        "color": blue
+    ),
+);
+
+@each $name, $properties in $authors {
+    $filename: map-get($properties, ‘filename’);
+    $color: map-get($properties, ‘color’);
+
+    .section-#{$name} {
+        background-image: url(‘/#{$filename}’);
+        color: $color;
+    }
+}
+
+// While loop is the least preferred loop
+$number: 4;
+@while ($number > 0) {
+	$number: $number - 1;
+	@warn $number;
+}

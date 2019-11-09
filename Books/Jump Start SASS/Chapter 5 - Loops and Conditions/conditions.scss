@@ -1,0 +1,28 @@
+$is-square: true;
+.foo-square {
+	@if ($is-square) {
+		height: 100px;
+		width: 100px;
+	} @else {
+		height: 100px;
+		width: 200px;
+	}
+}
+
+$is-square: false; // Only false and null is considered as false. 0, "" and empty list are considered as true
+$width: 100px;
+
+.foo {
+	@if ($is-square and $width) {
+		width: $width;
+	} @else if ($is-square or $width) {
+		height: $width;
+	} @else {
+		marign: 10px;
+	}
+}
+
+$error: false;
+.bar {
+	background-color: if($error, red, green);
+}
