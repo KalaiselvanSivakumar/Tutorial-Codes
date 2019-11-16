@@ -1,0 +1,27 @@
+.container {
+	margin: 0 auto;
+	max-width: 42em;
+	padding: 0 1em;
+
+	p {
+		text-indent: 1em;
+
+		a {
+			color: red;
+
+			&:hover,
+			&:active {
+				color: pink;
+			}
+		}
+	}
+}
+
+// New class instead of selector class. & acts as the replacement holder.
+.container {
+	display: block;
+
+	&-hidden {
+		display: none;
+	}
+}

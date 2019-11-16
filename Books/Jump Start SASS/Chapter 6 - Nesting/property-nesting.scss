@@ -1,0 +1,22 @@
+.container {
+    // Used very rarely. Even suggestion in Visual Studio Code didn't work
+    font: {
+        family: Arial;
+        style: italic;
+        size: 12px;
+    }
+}
+
+// This is too much over engineered. Don't ever use it
+$styles: (
+    'family': Arial,
+    'weight': bold,
+    'style': italic
+);
+.navigation {
+    font: {
+        @each $property, $value in $styles {
+            #{$property}: $value;
+        }
+    }
+}

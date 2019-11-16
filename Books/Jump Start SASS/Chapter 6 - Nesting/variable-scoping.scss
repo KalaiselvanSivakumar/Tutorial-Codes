@@ -1,0 +1,12 @@
+.container {
+	$variable: 12px; // This variable is scoped to container class alone.
+
+	margin: $variable;
+
+	.content {
+		padding: $variable; // $variable is accessible in child class.
+	}
+}
+
+// Note: Variables declared in global scope is accessible everywhere
+// but it may pollute the global context

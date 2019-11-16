@@ -1,0 +1,45 @@
+.navigation li {
+    display: block;
+
+    // This will automatically reference parent.
+    @media screen and (min-width: 600px) {
+        display: inline-block;
+    }
+}
+
+// As always there is no limit to the depth of nesting
+@media screen {
+    .container li {
+        display: block;
+
+        // This media query will be "and" with the above media query
+        @media (min-width: 600px) {
+            display: inline-block;
+        }
+    }
+}
+
+.menu {
+    display: block;
+
+    @supports (display: flex) {
+        display: flex;
+    }
+}
+
+// Consider we want to generate a.button class inside .button class.
+.button {
+    color: green;
+
+    &a { // .buttona - Fail #1
+        text-decoration: none;
+    }
+
+    a#{&} { // .button a.button - Fail #2
+        text-decoration: none;
+    }
+
+    @at-root a#{&} { // a.button - Success
+        text-decoration: none;
+    }
+}

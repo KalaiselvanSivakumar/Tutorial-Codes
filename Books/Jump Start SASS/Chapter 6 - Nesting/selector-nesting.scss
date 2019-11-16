@@ -1,0 +1,17 @@
+.colored-box {
+	background-color: aqua;
+
+	.content {
+		color: blue;
+		margin: 4px;
+	}
+}
+
+// List of selectors
+.text-container {
+	font-size: 12px;
+
+	p, li, div {
+		text-indent: 1em;
+	}
+}
