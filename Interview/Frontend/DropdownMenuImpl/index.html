@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Drop down menu implementation</title>
+</head>
+<style>
+    html, body {
+        height: 100%;
+        width: 100%;
+    }
+
+    .drop-down-container {
+        border: 1px solid gray;
+        height: 30px;
+        width: 200px;
+    }
+</style>
+<body>
+    <div class="drop-down-container" onclick="dropDownClick(this)">--Select--</div>
+</body>
+<script>
+    // document.onload = function () {
+        
+    // }
+    function dropDownClick(listHolder) {
+        const list = document.getElementById('drop-down-list');
+        if (list) {
+            document.body.removeChild(list);
+            return;
+        }
+        const options = [
+            {
+                value: 'Cup',
+                text: 'Cup'
+            },
+            {
+                value: 'Coffee',
+                text: 'Coffee',
+            },
+            {
+                value: 'Tea',
+                text: 'Tea'
+            }
+        ];
+        const listEl = constructDropDownList(options);
+        positionDropDownList(listHolder, listEl);
+        document.body.appendChild(listEl);
+    }
+
+    function constructDropDownList(options) {
+        const listEl = document.createElement('ul');
+        listEl.id = 'drop-down-list';
+        for (let i = 0; i < options.length; ++i) {
+            const { value, text } = options[i];
+            const itemEl = document.createElement('li');
+            itemEl.setAttribute('value', value);
+            itemEl.innerText = text;
+            listEl.appendChild(itemEl);
+        }
+        return listEl
+    }
+
+    function positionDropDownList(listHolder, listEl) {
+        const top = listHolder.offsetTop + listHolder.offsetHeight;
+        const left = listHolder.offsetLeft;
+        listEl.style.position = 'fixed';
+        listEl.style.top = `${ top }px`;
+        listEl.style.left = `${ left }px`;
+    }
+</script>
+</html>
