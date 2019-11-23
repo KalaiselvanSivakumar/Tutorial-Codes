@@ -1,0 +1,55 @@
+// Confused cascading:
+%light {
+    font-size: 18px;
+}
+
+%small {
+    font-size: 12px;
+}
+
+.class1 { // This will be generated after class2
+    @extend %small;
+}
+
+.class2 { // This will be generated at the top
+    @extend %light;
+}
+
+
+// Collateral Damage:
+.message {
+    background-color: black;
+    margin: 2px;
+    padding: 2px;
+}
+
+.warning {
+    @extend .message;
+    background-color: aqua;
+}
+
+.dark-theme {
+    .message { // Generates for warning too.
+        background-color: black;
+    }
+}
+
+// Hard to read and undesired effect by changing the order of selectors
+// Emits too many selectors and places classes before directives
+.typography {
+    .bold {
+        font-weight: bold;
+    }
+}
+
+.widget-warning strong {
+    @extend .bold;
+}
+
+.widget-info strong {
+    @extend .bold;
+}
+
+.alert-error .important {
+    @extend .bold;
+}

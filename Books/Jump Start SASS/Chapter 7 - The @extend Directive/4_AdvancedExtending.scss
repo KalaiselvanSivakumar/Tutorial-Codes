@@ -1,0 +1,36 @@
+// Extending can be used even before the actual declaration of the selector
+.hover-link {
+    @extend a:hover; // Casues undesired effects
+}
+
+
+// Run this file to see the actual result
+a {
+    &[href*='http://'] {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.message {
+    color: black;
+}
+
+.info {
+    margin: 2px;
+}
+
+.message-info {
+    @extend .message;
+    @extend .info;
+}
+
+.message-info-single {
+    @extend .message, .info;
+}
+
+// This will throw error without optional flag
+.optional-extend {
+    @extend .optional !optional;
+}

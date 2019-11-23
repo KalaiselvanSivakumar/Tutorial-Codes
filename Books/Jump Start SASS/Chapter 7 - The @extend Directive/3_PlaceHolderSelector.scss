@@ -1,0 +1,13 @@
+%message {
+    border: 1px solid grey;
+    margin: 2px;
+    padding: 2px;
+}
+
+.info {
+    @extend %message;
+}
+
+.warning {
+    @extend %message;
+}

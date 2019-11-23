@@ -1,0 +1,7 @@
+.a .b .c {
+    color: black;
+}
+
+.d .e .f {
+    @extend .c;
+}

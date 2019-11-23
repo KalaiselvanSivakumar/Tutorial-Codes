@@ -1,0 +1,15 @@
+.message {
+    color: black;
+    border: 1px solid grey;
+    margin: 2px;
+}
+
+.info {
+    @extend .message;
+    color: blue;
+}
+
+.warning {
+    @extend .message;
+    color: yellow;
+}
