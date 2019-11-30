@@ -1,4 +1,5 @@
-import React, { Component, SyntheticEvent } from 'react';
+import React, { Component } from 'react';
+import axios from 'axios';
 
 type CreateTodoProps = {};
 type CreateTodoState = {
@@ -52,11 +53,34 @@ export default class CreateTodo extends Component<CreateTodoProps, CreateTodoSta
     // Type of event can simply be "React.FormEvent"
     onSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        console.log(
-            `Form Submitted:\nTodo Description: ${ this.state.todo_description
-            }\nTodo Responsible: ${ this.state.todo_responsible
-            }\nTodo Priority: ${ this.state.todo_priority }`
-        );
+
+        const todoItem = {
+            todo_description: this.state.todo_description,
+            todo_responsible: this.state.todo_responsible,
+            todo_priority: this.state.todo_priority,
+            todo_completed: this.state.todo_completed
+        };
+        // console.log(
+        //     `Form Submitted:\nTodo Description: ${ todoItem.todo_description
+        //     }\nTodo Responsible: ${ todoItem.todo_responsible
+        //     }\nTodo Priority: ${ todoItem.todo_priority }`
+        // );
+
+        axios.post(
+            'http://localhost:4000/todos/add', todoItem, {
+                headers: {
+                    'content-type': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                }
+            }
+        ).then(
+            response => {
+                console.log(response.data);
+            }
+        ).catch(error => {
+            console.log(error);
+        });
+        
         this.setState(
             {
                 todo_description: '',
