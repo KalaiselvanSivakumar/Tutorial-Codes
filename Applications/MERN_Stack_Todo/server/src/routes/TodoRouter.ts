@@ -18,9 +18,15 @@ todoRouter
 
 todoRouter
     .route('/add')
-    .get((request, response) => {
+    .post((request, response) => {
         // console.log('Addition request received');
         // console.log(request.body);
+        if (Object.keys(request.body).length === 0) {
+            response
+                .status(400)
+                .send('Nothing to add');
+            return;
+        }
         const todoItem = new TodoModel(request.body);
         todoItem
             .save()
