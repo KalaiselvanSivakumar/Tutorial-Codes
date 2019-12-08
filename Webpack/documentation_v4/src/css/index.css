@@ -1,0 +1,11 @@
+body {
+    height: 100vh;
+    /* This file path will be modified by webpack using file-loader */
+    background-image: url('../images/logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.hello {
+    color: red;
+}
