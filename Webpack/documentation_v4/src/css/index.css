@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'Lato';
+    src: url('../fonts/Lato-Regular.woff2') format('woff2');
+    font-style: normal;
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Lato';
+    src: url('../fonts/Lato-Bold.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 'bold';
+}
+
 body {
     height: 100vh;
     /* This file path will be modified by webpack using file-loader */
@@ -8,4 +22,5 @@ body {
 
 .hello {
     color: red;
+    font-family: Lato;
 }
