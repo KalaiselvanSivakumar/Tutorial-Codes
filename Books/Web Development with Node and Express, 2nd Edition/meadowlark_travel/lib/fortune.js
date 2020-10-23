@@ -8,4 +8,4 @@ const fortuneCookies = [
 
 exports.getFortune = function() {
   return fortuneCookies[Math.floor(Math.random() * fortuneCookies.length)];
-}
+};

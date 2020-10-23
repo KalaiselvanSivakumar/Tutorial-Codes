@@ -1,7 +1,8 @@
+/* global process:readonly, __dirname:readonly */
 const express = require('express');
 const expressHandlebars = require('express-handlebars');
 
-const fortune = require('./lib/fortune');
+const handlers = require('./lib/handlers');
 
 const app = express();
 
@@ -28,14 +29,16 @@ app.set('view engine', 'handlebars');
 //   res.send('About Meadowlark Travel');
 // });
 
-app.get('/', (req, res) => res.render('home'));
+app.get('/', handlers.home);
 // app.get('/about', (req, res) => res.render('about'));
 
-app.get('/about', (req, res) => {
-  res.render('about', {
-    fortune: fortune.getFortune()
-  });
-});
+// app.get('/about', (req, res) => {
+//   res.render('about', {
+//     fortune: fortune.getFortune()
+//   });
+// });
+
+app.get('/about', handlers.about);
 
 // Telling express to use the public folder as static resource directory
 // This is static middleware
@@ -44,33 +47,43 @@ app.get('/about', (req, res) => {
 app.use(express.static(__dirname + '/public'));
 
 // Custom 404 page
-app.use((req, res) => {
-  res.status(404);
+// app.use((req, res) => {
+//   res.status(404);
 
-  // Below two lines is basic example
+//   // Below two lines is basic example
 
-  // res.type('text/plain');
-  // res.send('404 - Not Found');
+//   // res.type('text/plain');
+//   // res.send('404 - Not Found');
 
-  res.render('404');
-});
+//   res.render('404');
+// });
+
+app.use(handlers.notFound);
 
 // Custom 500 page
-app.use((err, req, res, next) => {
-  console.error(err.message);
-  res.status(500);
+// app.use((err, req, res, next) => {
+//   console.error(err.message);
+//   res.status(500);
 
-  // res.type('text/plain');
-  // res.send('500 - Server Error');
+//   // res.type('text/plain');
+//   // res.send('500 - Server Error');
 
-  res.render('500');
-});
+//   res.render('500');
+// });
+
+app.use(handlers.serverError);
 
 // Express differentiates 404 and 500 based on the number of arguments in the callback function
 // Above two use methods are examples of middlewares supported by express
 
-app.listen(port, () => {
-  console.log(
-    `Express started on http://localhost:${ port }; ` +
-    'press Ctrl-C to terminate.');
-});
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(
+      `Express started on http://localhost:${ port }; ` +
+      'press Ctrl-C to terminate.');
+  });
+}
+else {
+  // Testing flow
+  module.exports = app;
+}
