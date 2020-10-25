@@ -1,6 +1,7 @@
 /* global process:readonly, __dirname:readonly */
 const express = require('express');
 const expressHandlebars = require('express-handlebars');
+const bodyParser = require('body-parser');
 
 const handlers = require('./lib/handlers');
 
@@ -8,14 +9,44 @@ const app = express();
 
 const port = process.env.PORT || 3001;
 
+// Middleware to parse body of the request
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 // Configure Handlebars view engine
 app.engine('handlebars', expressHandlebars({
   // This file will be the default layout file for all requests.
   // Unless you specify, this will be used for all views.
-  defaultLayout: 'main'
+  defaultLayout: 'main',
+
+  /**
+   * By default, express handlebars will look for files with .handlebars extension only.
+   * To use more common .hbs extension, we have to pass the below option.
+   */
+  // extname: '.hbs',
+  helpers: {
+    section(name, options) {
+      // eslint-disable-next-line no-underscore-dangle
+      if (!this._sections) {
+        // eslint-disable-next-line no-underscore-dangle
+        this._sections = {};
+      }
+      // eslint-disable-next-line no-underscore-dangle
+      this._sections[name] = options.fn(this);
+
+      return null;
+    }
+  }
 }));
 app.set('view engine', 'handlebars');
+
+/**
+ * To enable template view caching.
+ * By default, in development mode, view caching is disabled and
+ * in production mode, view caching is enabled
+ */
+app.set('view cache', true);
 
 
 // app.get('/', (req, res) => {
@@ -39,6 +70,8 @@ app.get('/', handlers.home);
 // });
 
 app.get('/about', handlers.about);
+
+app.get('/showheaders', handlers.showHeaders);
 
 // Telling express to use the public folder as static resource directory
 // This is static middleware
@@ -75,6 +108,10 @@ app.use(handlers.serverError);
 
 // Express differentiates 404 and 500 based on the number of arguments in the callback function
 // Above two use methods are examples of middlewares supported by express
+
+// The below is the response header set to Express by express application.
+// We should hide these kind of information to avoid giving hint to the hacker about the server.
+app.disable('x-powered-by');
 
 if (require.main === module) {
   app.listen(port, () => {
