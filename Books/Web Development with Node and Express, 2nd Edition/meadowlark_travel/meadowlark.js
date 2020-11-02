@@ -3,8 +3,13 @@ const express = require('express');
 const expressHandlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const multiparty = require('multiparty');
+const cookieParser = require('cookie-parser');
+const expressSession = require('express-session');
+
+const flashMiddleware = require('./lib/middleware/flash');
 
 const handlers = require('./lib/handlers');
+const { credentials } = require('./config');
 
 const app = express();
 
@@ -14,6 +19,16 @@ const port = process.env.PORT || 3001;
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+app.use(cookieParser(credentials.cookieSecret));
+// Make sure, cookieParser is linked before expressSession middleware
+app.use(expressSession({
+  resave: false,
+  saveUninitialized: false,
+  secret: credentials.cookieSecret
+}));
+
+app.use(flashMiddleware);
 
 // Configure Handlebars view engine
 app.engine('handlebars', expressHandlebars({
@@ -81,6 +96,8 @@ app.get('/newsletter-signup/thankyou', handlers.newsletterSignupThankYou);
 app.get('/newsletter', handlers.newsletter);
 app.post('/api/newsletter-signup', handlers.api.newsletterSignup);
 
+app.post('/newsletter', handlers.newsletterPost);
+
 app.get('/contest/vacation-photo', handlers.vacationPhotoContest);
 app.post('/contest/vacation-photo/:year/:month', (req, res) => {
   const form = new multiparty.Form();
@@ -95,6 +112,9 @@ app.post('/contest/vacation-photo/:year/:month', (req, res) => {
     return res;
   });
 });
+
+app.get('/set-sample-cookie', handlers.setSampleCookie);
+app.get('/get-sample-cookie', handlers.getSampleCookie);
 
 // Telling express to use the public folder as static resource directory
 // This is static middleware
