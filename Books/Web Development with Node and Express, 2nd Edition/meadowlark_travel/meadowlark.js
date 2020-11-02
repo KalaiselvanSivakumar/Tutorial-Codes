@@ -2,6 +2,7 @@
 const express = require('express');
 const expressHandlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
+const multiparty = require('multiparty');
 
 const handlers = require('./lib/handlers');
 
@@ -11,7 +12,7 @@ const port = process.env.PORT || 3001;
 
 // Middleware to parse body of the request
 app.use(bodyParser.urlencoded({
-  extended: false
+  extended: true
 }));
 
 // Configure Handlebars view engine
@@ -72,6 +73,28 @@ app.get('/', handlers.home);
 app.get('/about', handlers.about);
 
 app.get('/showheaders', handlers.showHeaders);
+
+app.get('/newsletter-signup', handlers.newsletterSignup);
+app.post('/newsletter-signup/process', handlers.newsletterSignupProcess);
+app.get('/newsletter-signup/thankyou', handlers.newsletterSignupThankYou);
+
+app.get('/newsletter', handlers.newsletter);
+app.post('/api/newsletter-signup', handlers.api.newsletterSignup);
+
+app.get('/contest/vacation-photo', handlers.vacationPhotoContest);
+app.post('/contest/vacation-photo/:year/:month', (req, res) => {
+  const form = new multiparty.Form();
+  form.parse(req, (err, fields, files) => {
+    if (err) {
+      return res.status(500).send({
+        error: err.message
+      });
+    }
+    handlers.vacationPhotoContestProcess(req, res, fields, files);
+
+    return res;
+  });
+});
 
 // Telling express to use the public folder as static resource directory
 // This is static middleware
