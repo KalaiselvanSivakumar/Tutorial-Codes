@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 
 const flashMiddleware = require('./lib/middleware/flash');
+const cartValidation = require('./lib/middleware/cartValidation');
 
 const handlers = require('./lib/handlers');
 const { credentials } = require('./config');
@@ -29,6 +30,9 @@ app.use(expressSession({
 }));
 
 app.use(flashMiddleware);
+app.use(cartValidation.resetValidation);
+app.use(cartValidation.checkWaivers);
+app.use(cartValidation.checkGuestCounts);
 
 // Configure Handlebars view engine
 app.engine('handlebars', expressHandlebars({
