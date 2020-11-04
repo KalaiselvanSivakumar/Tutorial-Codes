@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const multiparty = require('multiparty');
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
+const nodeMailer = require('nodemailer');
 
 const flashMiddleware = require('./lib/middleware/flash');
 const cartValidation = require('./lib/middleware/cartValidation');
@@ -15,6 +16,37 @@ const { credentials } = require('./config');
 const app = express();
 
 const port = process.env.PORT || 3001;
+
+// const mailTransport = nodeMailer.createTransport({
+//   auth: {
+//     pass: credentials.sendgrid.pass,
+//     user: credentials.sendgrid.user
+//   },
+//   host: 'smtp.sendgrid.net',
+//   port: 587,
+// });
+
+// Simple mail send example
+// mailTransport.sendMail({
+//   from: '"Sendgrid register" <registeredmailinsendgridforfrom@gmail.com>',
+//   subject: 'Testing simple mail from nodeMail package',
+//   // Node mailer allows to send HTML version and text version at the same time. Email client will pick up the version it needs.
+//   html: '<h1>Simple mail example</h1>\n<p>This is a <b>paragraph</b></p>',
+//   text: 'Simple mail send example application!',
+
+//   // Single recipient
+//   // to: 'anyaddressforsendinginsendgrid@gmail.com',
+
+//   // Multiple recipients supported using comma
+//   to: 'anyaddressforsendinginsendgrid@gmail.com, "Sendgrid test" <sendgridtestemail@yahoo.com>, someotherdomailemail@outlook.com'
+// })
+// .then((result) => {
+//   console.log('Mail sent successfully: ', result);
+// })
+// .catch((err) => {
+//   console.log('Could not send mail: ' + err.message);
+// })
+
 
 // Middleware to parse body of the request
 app.use(bodyParser.urlencoded({
@@ -119,6 +151,8 @@ app.post('/contest/vacation-photo/:year/:month', (req, res) => {
 
 app.get('/set-sample-cookie', handlers.setSampleCookie);
 app.get('/get-sample-cookie', handlers.getSampleCookie);
+
+app.post('/cart/checkout', handlers.checkout);
 
 // Telling express to use the public folder as static resource directory
 // This is static middleware

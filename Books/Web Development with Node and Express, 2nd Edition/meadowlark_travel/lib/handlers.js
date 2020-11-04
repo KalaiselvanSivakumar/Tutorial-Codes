@@ -1,4 +1,5 @@
 const fortune = require('./fortune');
+const mailTransport = require('./mailTransport');
 
 exports.home = (req, res) => res.render('home');
 
@@ -143,4 +144,51 @@ exports.getSampleCookie = (req, res) => {
   res.json({
     cookie: 'Cookie printed successfully'
   });
+}
+
+exports.checkout = (req, res, next) => {
+  const { cart } = req.session;
+  if (!cart) {
+    return next(new Error('Cart does not exist.'));
+  }
+  const name = req.body.name || '';
+  const email = req.body.email || '';
+  // Validate email
+  cart.number = Math.random().toString()
+    .replace(/^0\.0*/, '');
+  cart.billing = {
+    email,
+    name,
+  }
+  res.render('email/cart-thank-you', {
+    cart,
+    layout: null,
+  }, (err, html) => {
+    console.log('Rendered email: ' + html);
+    if (err) {
+      console.log('Error in email template.');
+
+      return next(err);
+    }
+    mailTransport.sendMail({
+      from: '"Sendgrid register" <registeredmailinsendgridforfrom@gmail.com>',
+      html,
+      subject: 'Thank you for Book your trip with our travel',
+      // You can use some html to text formatter library for the below conversion
+      text: 'Thankyou',
+      to: cart.billing.email
+    }).then((info) => {
+      console.log('Sent! ', info);
+      res.render('cart-thank-you', {
+        cart
+      });
+    })
+    .catch((emailErr) => {
+      console.error('Unable to send confirmation: ' + err.message);
+
+      return next(emailErr);
+    });
+
+    return null;
+  })
 }
