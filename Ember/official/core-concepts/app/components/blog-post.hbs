@@ -1,0 +1,34 @@
+<h1>{{@post.title}}</h1>
+<h2>{{@post.author}}</h2>
+
+{{yield @post.body}}
+
+{{!-- usage --}}
+<!-- usage -->
+<!--
+<BlogPost @post={{@blogPost}} as |postBody|>
+  <img alt="" role="presentation" src="./blog-logo.png">
+
+  {{postBody}}
+
+  <AuthorBio @author={{@blogPost.author}} />
+</BlogPost>
+-->
+
+
+
+<!--
+{{yield @post.title @post.author @post.body }}
+-->
+<!-- usage -->
+<!--
+<BlogPost @post={{@blogPost}} as |postTitle postAuthor postBody|>
+  <img alt="" role="presentation" src="./blog-logo.png">
+
+  {{postTitle}}
+
+  {{postBody}}
+
+  <AuthorBio @author={{postAuthor}} />
+</BlogPost>
+-->

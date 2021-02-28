@@ -1,0 +1,8 @@
+<dialog>
+  {{!-- If a block is passed, it will be rendered. has-block is a helper function --}}
+  {{#if (has-block)}}
+    {{yield}}
+  {{else}}
+    An unknown error occurred!
+  {{/if}}
+</dialog>
