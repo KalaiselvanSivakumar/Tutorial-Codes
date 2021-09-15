@@ -2,3 +2,5 @@
 clover.xml
 coverage/**
 .credentials.*
+
+access.log

@@ -5,7 +5,10 @@ const bodyParser = require('body-parser');
 const multiparty = require('multiparty');
 const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
-const nodeMailer = require('nodemailer');
+// const nodeMailer = require('nodemailer');
+const morgan = require('morgan');
+const fs = require('fs');
+const cluster = require('cluster');
 
 const flashMiddleware = require('./lib/middleware/flash');
 const cartValidation = require('./lib/middleware/cartValidation');
@@ -15,7 +18,7 @@ const { credentials } = require('./config');
 
 const app = express();
 
-const port = process.env.PORT || 3001;
+// const port = process.env.PORT || 3001;
 
 // const mailTransport = nodeMailer.createTransport({
 //   auth: {
@@ -47,6 +50,26 @@ const port = process.env.PORT || 3001;
 //   console.log('Could not send mail: ' + err.message);
 // })
 
+switch (app.get('env')) {
+  case 'production':
+    app.use(morgan('combined', {
+      stream: fs.createWriteStream(__dirname + '/access.log', {
+        flags: 'a'
+      })
+    }));
+    break;
+  case 'development':
+  default:
+    app.use(morgan('dev'));
+    break;
+}
+
+app.use((req, res, next) => {
+  if (cluster.isWorker) {
+    console.log(`Worker ${ cluster.worker.id } received request`);
+  }
+  next();
+})
 
 // Middleware to parse body of the request
 app.use(bodyParser.urlencoded({
@@ -154,6 +177,16 @@ app.get('/get-sample-cookie', handlers.getSampleCookie);
 
 app.post('/cart/checkout', handlers.checkout);
 
+app.get('/fail', (req, res) => {
+  throw new Error('Nope!');
+});
+
+app.get('/epic-fail', (req, res) => {
+  process.nextTick(() => {
+    throw new Error('Kaboom!')
+  })
+})
+
 // Telling express to use the public folder as static resource directory
 // This is static middleware
 // Putting this middleware first will have the same effect of defining route order.
@@ -194,14 +227,18 @@ app.use(handlers.serverError);
 // We should hide these kind of information to avoid giving hint to the hacker about the server.
 app.disable('x-powered-by');
 
-if (require.main === module) {
+function startServer(port) {
   app.listen(port, () => {
     console.log(
-      `Express started on http://localhost:${ port }; ` +
+      `Express started in ${ app.get('env') } mode at http://localhost:${ port }; ` +
       'press Ctrl-C to terminate.');
   });
 }
+
+if (require.main === module) {
+  startServer(process.env.PORT || 3001);
+}
 else {
   // Testing flow
-  module.exports = app;
+  module.exports = startServer;
 }

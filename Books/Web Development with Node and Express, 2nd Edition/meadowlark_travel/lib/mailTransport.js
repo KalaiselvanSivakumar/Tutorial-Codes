@@ -1,5 +1,5 @@
 const nodeMailer = require('nodemailer');
-const credentials = require('../config');
+const { credentials } = require('../config');
 
 exports.mailTransport = nodeMailer.createTransport({
   auth: {
